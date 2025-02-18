@@ -1,0 +1,7 @@
+sequencesPath = r"../data/sequences"
+targetpath    = r"../data/target"
+resultspath   = r"../results"
+dtwcudaname   = r"SHFL_FULLDTW_ALL.cuh"
+dtwcudapath   = r"../cuDTW/include/kernels"
+maincudaname  = r"main.cu"
+maincudapath  = r"../cuDTW"
