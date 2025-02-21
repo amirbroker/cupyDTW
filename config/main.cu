@@ -45,7 +45,7 @@ int main (int argc, char * argv[]) {
 
 
 
-	TIMERSTART(malloc)
+// 	TIMERSTART(malloc)
 	index_t num_entries = &*^; // 1UL << 21;  // entries in DB or stream
 	index_t num_features = $%^;                   // length of entries ################################## maximum lenght of S or Q
 	index_t num_gpus = 1;                          // number of GPUs to be used
@@ -61,17 +61,17 @@ int main (int argc, char * argv[]) {
 // 	assert(num_queries == 1);
 
 	// status
-	const value_t CU = num_features*num_features*num_entries*num_queries;
-	std::cout << "We are going to process "
-	          << CU/1000000000000.0
-	          << " Tera Cell Updates (TCU)"
-	          << std::endl;
-	const value_t DM = (num_entries*num_features+num_entries)
-	                   * sizeof(value_t);
-	std::cout << "We are going to stream exactly "
-	          << DM/1073741824.0
-	          << " Gibi Bytes (GiB) to and from the GPU"
-	          << std::endl;
+// 	const value_t CU = num_features*num_features*num_entries*num_queries;
+// 	std::cout << "We are going to process "
+// 	          << CU/1000000000000.0
+// 	          << " Tera Cell Updates (TCU)"
+// 	          << std::endl;
+// 	const value_t DM = (num_entries*num_features+num_entries)
+// 	                   * sizeof(value_t);
+// 	std::cout << "We are going to stream exactly "
+// 	          << DM/1073741824.0
+// 	          << " Gibi Bytes (GiB) to and from the GPU"
+// 	          << std::endl;
 
 	// create the streams on each GPU
 	cudaStream_t streams[num_gpus][num_streams];
@@ -100,9 +100,9 @@ int main (int argc, char * argv[]) {
 	}
 	CUERR
 
-	TIMERSTOP(malloc)
+// 	TIMERSTOP(malloc)
 
-	TIMERSTART(generate_data)
+// 	TIMERSTART(generate_data)
 
 	value_t * query_cpu = nullptr;
 	cudaMallocHost(&query_cpu, sizeof(value_t)*num_features);
@@ -114,8 +114,8 @@ int main (int argc, char * argv[]) {
 	cudaMallocHost(&labels_cpu, sizeof(label_t)*num_entries);
 	CUERR
 
-	load_binary(data_cpu, !&*%$, "data/seq.bin");
-	load_binary(query_cpu, #1%*$, "data/trg.bin");
+	load_binary(data_cpu, !&*%$, "9#@7*/^2*#$.bin");
+	load_binary(query_cpu, #1%*$, "0*6%$(/#1%*$.bin");
 //            for (index_t j =(num_features*num_queries)-100; j < (num_features*num_queries+10); j++) {
 //            for (index_t j =4845; j < 5100; j++) {
 	//              std::cout << j<< "\t" << data_cpu[j] << "\n";}
@@ -133,9 +133,9 @@ int main (int argc, char * argv[]) {
 
 
 
-	TIMERSTOP(generate_data)
+// 	TIMERSTOP(generate_data)
 
-	TIMERSTART_CUDA(streamed_computation)
+// 	TIMERSTART_CUDA(streamed_computation)
 	for (index_t batch = 0; /*no a priori bound check possible*/ ; batch++) {
 
 		// determine gpu and stream identifier from batch identifier
@@ -191,7 +191,7 @@ int main (int argc, char * argv[]) {
 		                streams[gpu][stream]);
 		cudaStreamSynchronize(streams[gpu][stream]);// added
 		std::ostringstream fn;     // added
-		fn << "#1%*$_^2*#$_" << batch << ".bin";// added
+		fn << "4$%#8&/#1%*$_^2*#$_" << batch << ".bin";// added
 		dump_binary(dist_ptr_cpu, batch_size, fn.str().c_str());// added
 
 
@@ -206,10 +206,10 @@ int main (int argc, char * argv[]) {
 		}
 	}
 	CUERR
-	TIMERSTOP_CUDA(streamed_computation)
+// 	TIMERSTOP_CUDA(streamed_computation)
 
 
-	TIMERSTART(free)
+// 	TIMERSTART(free)
 	// tear down all streams and GPU memory
 	for (index_t gpu = 0; gpu < num_gpus; gpu++) {
 		cudaSetDevice(gpu);
@@ -228,5 +228,5 @@ int main (int argc, char * argv[]) {
 	CUERR
 	cudaFreeHost(query_cpu);
 	CUERR
-	TIMERSTOP(free)
+// 	TIMERSTOP(free)
 }
